@@ -1,7 +1,18 @@
-FROM alpine:3.16
+FROM debian:buster
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 #look for updates and installs mariadb
-RUN apk update && apk add mariadb
+RUN apt-get update
+RUN apt-get install -y --quiet --no-install-recommends --no-install-suggests\
+		mariadb-server
+RUN apt-get install -y dumb-init
 #start command
-ENTRYPOINT "setup.sh"
-CMD ""
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
+#expose port to outside
+EXPOSE 3306
+COPY ./tools/50-setup.sh /usr/bin/50-setup.sh
+RUN chmod +x /usr/bin/50-setup.sh
+Copy ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+CMD [ "50-setup.sh", "mysqld_safe" ]
+# CMD [ "bash", "-c", "bash" ]
