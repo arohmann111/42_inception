@@ -11,8 +11,10 @@ RUN apt-get install -y dumb-init
 ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 #expose port to outside
 EXPOSE 3306
+#cope files to container
 COPY ./tools/50-setup.sh /usr/bin/50-setup.sh
 RUN chmod +x /usr/bin/50-setup.sh
-Copy ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+#arguments for the entrypoint
 CMD [ "50-setup.sh", "mysqld_safe" ]
 # CMD [ "bash", "-c", "bash" ]

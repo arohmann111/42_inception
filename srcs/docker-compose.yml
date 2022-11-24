@@ -1,0 +1,29 @@
+version: "3"
+services:
+#   nginx:
+#     build: requirements/nginx
+#     restart: always
+#     container_name: nginx
+  wp:
+    depends_on:
+      - db
+    build: requirements/wordpress
+    networks:
+      - inception
+    restart: always
+    container_name: wordpress
+    env_file:
+      - .env
+  db:
+    build: requirements/mariadb
+    networks:
+      - inception
+    container_name: mariadb
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+
+networks:
+  inception: { }
