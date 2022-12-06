@@ -1,9 +1,13 @@
 version: "3"
 services:
-#   nginx:
-#     build: requirements/nginx
-#     restart: always
-#     container_name: nginx
+  nginx:
+    build: requirements/nginx
+    networks:
+      - inception
+    restart: always
+    container_name: nginx
+    ports:
+      - '443:443'
   wp:
     depends_on:
       - db
