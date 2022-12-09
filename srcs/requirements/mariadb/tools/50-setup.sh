@@ -1,12 +1,5 @@
 #!/bin/bash
-
-# while 1; do;
-# done;
-# for i in $dir; do;
-# done;
-
 if [ ! -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
-
 
 #service mysql start
 ( service mysql start & ) | grep -q "active"
@@ -25,6 +18,5 @@ sleep 3
 	echo "DEAD"
 
 fi;
-echo huhumama123
 
 exec $@
