@@ -26,4 +26,8 @@ system_clean: down
 nginx_log:
 	docker container exec -it nginx cat /var/log/nginx/access.log
 	docker container exec -it nginx cat /var/log/nginx/error.log
+
+wordpress_log:
+	docker container exec -it wordpress cat /
+	docker container exec -it wordpress cat /
 re: down up
