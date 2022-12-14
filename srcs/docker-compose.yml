@@ -11,6 +11,8 @@ services:
     restart: always
     ports:
       - '443:443'
+    volumes:
+      - wp_nginx_volume:/var/www/wordpress
 
   wordpress:
     build: requirements/wordpress

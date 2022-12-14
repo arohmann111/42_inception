@@ -12,8 +12,12 @@ down:
 	$(DOCKER_COMPOSE_CMD) down
 
 clean:
-	docker compose -f $(DOCKER_COMPOSE_FILE) down -v
+	$(DOCKER_COMPOSE_CMD) down -v
 
+start:
+	$(DOCKER_COMPOSE_CMD) start
+stop:
+	$(DOCKER_COMPOSE_CMD) stop
 fclean: clean
 	sudo rm -rf /home/arohmann/data/db_volume
 	sudo rm -rf /home/arohmann/data/wp_nginx_volume
